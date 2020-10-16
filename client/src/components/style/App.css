@@ -1,0 +1,9 @@
+* {
+	font-size: 100%;
+}
+body {
+	background-image: url('../../photos/xp-follow.jpg');
+}
+.App {
+	text-align: left;
+}
