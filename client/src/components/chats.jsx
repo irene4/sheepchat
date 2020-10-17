@@ -8,9 +8,8 @@ export default function Chats({ setBuddy }) {
 		<ul>
 			{chats.map((chat, index) => {
 				return (
-					<li key={index} style={{ color: 'blue', fontWeight: 'bold', cursor: 'pointer' }}>
+					<li key={index} style={{ color: 'green', fontWeight: 'bold', cursor: 'pointer' }}>
 						<div
-							style={{ color: 'blue' }}
 							onClick={(e) => {
 								setBuddy(chat.user);
 							}}

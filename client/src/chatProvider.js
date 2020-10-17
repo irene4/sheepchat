@@ -20,11 +20,9 @@ export function ChatProvider({ user, children }) {
 	const appendMssg = useCallback(
 		({ recip, txt, sender }) => {
 			setChats((prevChats) => {
-				console.log(recip, txt, sender);
 				const newMssg = { sender, txt };
 				const newChats = prevChats.map((chat) => {
 					if (chat.user === recip || sender === chat.user) {
-						console.log('did i get here');
 						return { ...chat, messages: [...chat.messages, newMssg] };
 					}
 					return chat;

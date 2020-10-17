@@ -2,11 +2,12 @@ import React, { useRef } from 'react';
 import { useChats } from '../chatProvider';
 import Chats from './chats';
 import Convo from './convo';
+import Store from '../local';
 
 export default function Chatroom({ user }) {
 	const userRef = useRef();
 	const { createChat } = useChats();
-	const [buddy, setBuddy] = React.useState('testuser');
+	const [buddy, setBuddy] = Store('buddy', []);
 
 	function submit(e) {
 		e.preventDefault();
