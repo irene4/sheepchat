@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useEffect, useCallback } from 'react';
 import Store from './local.js';
 import { useSocket } from './socketProvider.js';
 
@@ -17,19 +17,31 @@ export function ChatProvider({ user, children }) {
 			return [...prevChats, { user, messages: [] }];
 		});
 	}
-	function appendMssg({ recip, txt, sender }) {
-		setChats((prevChats) => {
-			const newMssg = { sender, txt };
-			const newChats = prevChats.map((chat) => {
-				if (chat.user === recip) {
-					return { ...chat, messages: [...chat.messages, newMssg] };
-				}
-				return chat;
+	const appendMssg = useCallback(
+		({ recip, txt, sender }) => {
+			setChats((prevChats) => {
+				console.log(recip, txt, sender);
+				const newMssg = { sender, txt };
+				const newChats = prevChats.map((chat) => {
+					if (chat.user === recip || sender === chat.user) {
+						console.log('did i get here');
+						return { ...chat, messages: [...chat.messages, newMssg] };
+					}
+					return chat;
+				});
+				return newChats;
 			});
-			return newChats;
-		});
-	}
+		},
+		[setChats]
+	);
+	useEffect(() => {
+		if (socket == null) return;
+		socket.on('get mssg', appendMssg);
+		return () => socket.off('get mssg');
+	}, [socket, appendMssg]);
+
 	function sendMssg(recip, txt) {
+		socket.emit('send mssg', { recip, txt });
 		appendMssg({ recip, txt, sender: user });
 	}
 

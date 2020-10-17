@@ -13,9 +13,11 @@ export default function App() {
 
 	return (
 		<div className="App">
-			<ChatProvider user={user}>
-				<Wind0w user={user} setUser={setUser} incZ={incZ} highestZ={highestZ} initTop={30} initLeft={150} />
-			</ChatProvider>
+			<SocketProvider user={user}>
+				<ChatProvider user={user}>
+					<Wind0w user={user} setUser={setUser} incZ={incZ} highestZ={highestZ} initTop={30} initLeft={150} />
+				</ChatProvider>
+			</SocketProvider>
 		</div>
 	);
 }

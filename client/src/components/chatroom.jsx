@@ -6,6 +6,7 @@ import Convo from './convo';
 export default function Chatroom({ user }) {
 	const userRef = useRef();
 	const { createChat } = useChats();
+	const [buddy, setBuddy] = React.useState('testuser');
 
 	function submit(e) {
 		e.preventDefault();
@@ -24,7 +25,7 @@ export default function Chatroom({ user }) {
 					</li>
 					<li style={{ paddingTop: '1rem' }}>
 						Chats
-						<Chats />
+						<Chats setBuddy={setBuddy} />
 					</li>
 
 					<form onSubmit={submit} style={{ paddingTop: '1rem' }}>
@@ -46,7 +47,7 @@ export default function Chatroom({ user }) {
 					backgroundColor: 'white',
 				}}
 			>
-				<Convo user={user} recip={'testuser'} />
+				<Convo user={user} recip={buddy} />
 			</div>
 		</div>
 	);
