@@ -17,6 +17,10 @@ export function ChatProvider({ user, children }) {
 			return [...prevChats, { user, messages: [] }];
 		});
 	}
+	function sendMssg(recip, txt) {
+		socket.emit('send mssg', { recip, txt });
+		appendMssg({ recip, txt, sender: user });
+	}
 	const appendMssg = useCallback(
 		({ recip, txt, sender }) => {
 			setChats((prevChats) => {
@@ -32,16 +36,12 @@ export function ChatProvider({ user, children }) {
 		},
 		[setChats]
 	);
+
 	useEffect(() => {
 		if (socket == null) return;
 		socket.on('get mssg', appendMssg);
 		return () => socket.off('get mssg');
 	}, [socket, appendMssg]);
-
-	function sendMssg(recip, txt) {
-		socket.emit('send mssg', { recip, txt });
-		appendMssg({ recip, txt, sender: user });
-	}
 
 	return <ChatCtx.Provider value={{ chats, createChat, sendMssg }}> {children} </ChatCtx.Provider>;
 }
