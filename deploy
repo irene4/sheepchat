@@ -1,0 +1,14 @@
+#!/bin/bash
+
+read -p "Are you sure? (make sure u committed latest changes)" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    # do dangerous stuff
+    cd client
+    npm run build
+    cd ../server
+    cd ..
+    git subtree push --prefix server heroku main
+fi
+

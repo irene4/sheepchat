@@ -11,9 +11,15 @@ export function SocketProvider({ user, children }) {
 	const [socket, setSocket] = useState();
 
 	useEffect(() => {
-		const newSocket = io({ query: { user } });
-		setSocket(newSocket);
-		return () => newSocket.close();
+		if (process.env.NODE_ENV === 'development') {
+			const newSocket = io('http://localhost:8080/', { query: { user } });
+			setSocket(newSocket);
+			return () => newSocket.close();
+		} else {
+			const newSocket = io({ query: { user } });
+			setSocket(newSocket);
+			return () => newSocket.close();
+		}
 	}, [user]);
 
 	return <SocketCtx.Provider value={socket}>{children}</SocketCtx.Provider>;
