@@ -9,7 +9,7 @@ import { SocketProvider } from '../socketProvider';
 
 export default function App() {
 	const [highestZ, incZ] = React.useState(0);
-	const [user, setUser] = Store('user');
+	const [user, setUser] = Store('user', '');
 
 	return (
 		<div className="App">
