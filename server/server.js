@@ -9,7 +9,6 @@ app.use(express.static('build'));
 
 io.on('connection', (socket) => {
 	const user = socket.handshake.query.user;
-	console.log(socket.handshake.query);
 	console.log(user + ' CONNECTED');
 	socket.join(user);
 
@@ -23,6 +22,4 @@ app.get('/', (req, res) => {
 	res.sendFile(__dirname + '/build/index.html');
 });
 
-http.listen(port, () => {
-	console.log(`Example app listening at http://localhost:${port}`);
-});
+http.listen(port, () => {});

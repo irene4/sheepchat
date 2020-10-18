@@ -25,7 +25,6 @@ export function ChatProvider({ user, children }) {
 		({ recip, txt, sender }) => {
 			setChats((prevChats) => {
 				const newMssg = { sender, txt };
-				console.log(recip, txt, sender, prevChats);
 				const newChats = prevChats.map((chat) => {
 					if (chat.user === recip || sender === chat.user) {
 						return { ...chat, messages: [...chat.messages, newMssg] };
