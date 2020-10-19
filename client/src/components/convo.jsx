@@ -4,7 +4,6 @@ import { useChats } from '../chatProvider';
 export default function Convo(props) {
 	const { chats, sendMssg } = useChats();
 	const [txt, setTxt] = useState('');
-	const box = document.getElementById('box');
 	const thisChat = chats.find((chat) => {
 		return chat.user === props.recip;
 	});
@@ -12,7 +11,6 @@ export default function Convo(props) {
 		e.preventDefault();
 		if (txt) sendMssg(props.recip, txt);
 		setTxt('');
-		box.scrollTop = box.scrollHeight;
 	}
 	return (
 		<div>

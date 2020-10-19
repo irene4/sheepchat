@@ -17,6 +17,10 @@ export function ChatProvider({ user, children }) {
 			return [...prevChats, { user, messages: [] }];
 		});
 	}
+	function scroll() {
+		const box = document.getElementById('box');
+		box.scrollTop = box.scrollHeight;
+	}
 	function sendMssg(recip, txt) {
 		socket.emit('send mssg', { recip, txt });
 		appendMssg({ recip, txt, sender: user });
@@ -31,6 +35,7 @@ export function ChatProvider({ user, children }) {
 					}
 					return chat;
 				});
+				scroll();
 				return newChats;
 			});
 		},
