@@ -43,6 +43,7 @@ export function ChatProvider({ user, children }) {
 	);
 
 	useEffect(() => {
+		scroll();
 		if (socket == null) return;
 		socket.on('get mssg', appendMssg);
 		return () => socket.off('get mssg');

@@ -1,4 +1,3 @@
-//This doesn't work rn because its a hook
 import { useEffect, useState } from 'react';
 
 export default function Store(key, init) {

@@ -98,7 +98,6 @@ export default class Wind0w extends Component {
                             height={this.props.frameH}
                             width={this.props.frameW} >
                         </iframe> */}
-						{console.log(this.props.user)}
 						{this.props.user ? <Chatroom user={this.props.user} /> : <Login setUser={this.props.setUser} />}
 					</div>
 				</div>
