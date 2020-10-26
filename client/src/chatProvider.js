@@ -22,7 +22,7 @@ export function ChatProvider({ user, children }) {
 		box.scrollTop = box.scrollHeight;
 	}
 	function sendMssg(recip, txt) {
-		socket.emit('send mssg', { recip, txt });
+		socket.emit('send mssg!', { recip, txt });
 		appendMssg({ recip, txt, sender: user });
 	}
 	const appendMssg = useCallback(
@@ -45,8 +45,8 @@ export function ChatProvider({ user, children }) {
 	useEffect(() => {
 		scroll();
 		if (socket == null) return;
-		socket.on('get mssg', appendMssg);
-		return () => socket.off('get mssg');
+		socket.on('get mssg!', appendMssg);
+		return () => socket.off('get mssg!');
 	}, [socket, appendMssg]);
 
 	return <ChatCtx.Provider value={{ chats, createChat, sendMssg }}> {children} </ChatCtx.Provider>;

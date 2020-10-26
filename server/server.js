@@ -12,9 +12,9 @@ io.on('connection', (socket) => {
 	console.log(user + ' CONNECTED');
 	socket.join(user);
 
-	socket.on('send mssg', ({ recip, txt }) => {
+	socket.on('send mssg!', ({ recip, txt }) => {
 		console.log('SENDING "' + txt + '" TO ' + recip);
-		socket.to(recip).emit('get mssg', { recip, sender: user, txt });
+		socket.to(recip).emit('get mssg!', { recip, sender: user, txt });
 	});
 });
 
