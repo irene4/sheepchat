@@ -19,7 +19,7 @@ export function ChatProvider({ user, children }) {
 	}
 	function scroll() {
 		const box = document.getElementById('box');
-		box.scrollTop = box.scrollHeight;
+		if (box) box.scrollTop = box.scrollHeight;
 	}
 	function sendMssg(recip, txt) {
 		socket.emit('send mssg!', { recip, txt });
