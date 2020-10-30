@@ -5,9 +5,9 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # do dangerous stuff
-    cd client
-    npm run build
-    cd ..
+    # cd client
+    # npm run build
+    # cd ..
     git subtree push --prefix server heroku main
 fi
 
