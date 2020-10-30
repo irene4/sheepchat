@@ -15,11 +15,12 @@ export default function Convo(props) {
 	return (
 		<div>
 			<div id="box" style={{ height: '14rem', width: '20rem', overflow: 'auto' }}>
-				<ul>
+				<ul style={{ listStyle: 'none' }}>
+					{thisChat.messages.length==0 && <label><strong style={{color: 'green'}}>New chat with {props.recip}.</strong></label>}
 					{thisChat &&
 						thisChat.messages.map((mssg, index) => {
 							return (
-								<li key={index} style={{ listStyle: 'none' }}>
+								<li key={index} >
 									<label>
 										<strong style={mssg.sender === props.user ? { color: 'blue' } : { color: 'green' }}>{mssg.sender}: </strong>
 										{'   '}

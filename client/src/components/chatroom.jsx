@@ -12,6 +12,7 @@ export default function Chatroom({ user }) {
 	function submit(e) {
 		e.preventDefault();
 		createChat(userRef.current.value);
+		setBuddy(userRef.current.value);
 		userRef.current.value = '';
 	}
 

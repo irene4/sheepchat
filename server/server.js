@@ -9,13 +9,16 @@ app.use(express.static('build'));
 
 io.on('connection', (socket) => {
 	const user = socket.handshake.query.user;
-	console.log(user + ' CONNECTED');
+	console.log(user + ' connected');
 	socket.join(user);
 
 	socket.on('send mssg!', ({ recip, txt }) => {
 		console.log('SENDING "' + txt + '" TO ' + recip);
 		socket.to(recip).emit('get mssg!', { recip, sender: user, txt });
 	});
+});
+io.on('disconnect', () => {
+	console.log(user + ' disconnected');
 });
 
 app.get('/', (req, res) => {
