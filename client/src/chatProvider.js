@@ -16,6 +16,7 @@ export function ChatProvider({ user, children }) {
 		setChats((prevChats) => {
 			return [...prevChats, { user, messages: [] }];
 		});
+		console.log(`New chat created with ${user}.`);
 	}
 	function scroll() {
 		const box = document.getElementById('box');
@@ -27,6 +28,16 @@ export function ChatProvider({ user, children }) {
 	}
 	const appendMssg = useCallback(
 		({ recip, txt, sender }) => {
+			var newBuddy = true;
+			chats.forEach((chat) => {
+				//console.log('ME:', user, 'FROM:', chat.user, 'TO:', recip, 'MATCH?', chat.user === sender);
+				if (chat.user === recip || sender === chat.user) newBuddy = false;
+			});
+			//console.log('NEW BUDDY FLAG:', newBuddy, 'SENDER!=ME?', sender !== user);
+			if (newBuddy === true && sender !== user) {
+				console.log(`Message received from a new user, ${sender}!`);
+				createChat(sender);
+			}
 			setChats((prevChats) => {
 				const newMssg = { sender, txt };
 				const newChats = prevChats.map((chat) => {
@@ -39,7 +50,7 @@ export function ChatProvider({ user, children }) {
 				return newChats;
 			});
 		},
-		[setChats]
+		[chats, setChats]
 	);
 
 	useEffect(() => {

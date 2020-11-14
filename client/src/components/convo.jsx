@@ -16,7 +16,7 @@ export default function Convo(props) {
 		<div>
 			<div id="box" style={{ height: '14rem', width: '20rem', overflow: 'auto' }}>
 				<ul style={{ listStyle: 'none' }}>
-					{thisChat.messages.length==0 && <label><strong style={{color: 'green'}}>New chat with {props.recip}.</strong></label>}
+					{thisChat && thisChat.messages.length===0 && <label><strong style={{color: 'green'}}>New chat with {props.recip}.</strong></label>}
 					{thisChat &&
 						thisChat.messages.map((mssg, index) => {
 							return (
