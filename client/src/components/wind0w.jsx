@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chatroom from './chatroom';
 import Login from './login';
+import icon from '../photos/sheepchat-icon.png'
 import './style/wind0w.css';
 
 export default class Wind0w extends Component {
@@ -80,8 +81,9 @@ export default class Wind0w extends Component {
 		return (
 			<div className="wind0w" style={this.state.styles}>
 				<div className="window">
+					<img src={icon} style={{position:"absolute", padding:"6px"}} width="18px"></img>
 					<div className="title-bar" style={{ cursor: 'grab' }} onMouseDown={this.startDrag} onMouseUp={this.stopDrag}>
-						<div className="title-bar-text">Instant Messenger</div>
+						<div className="title-bar-text" style={{position:"relative", left:"20px"}}>Sheep Chat</div>
 						<div className="title-bar-controls">
 							<button aria-label="Minimize" onDoubleClick={() => console.log('Double clicked!')} />
 							<button aria-label="Maximize" />
