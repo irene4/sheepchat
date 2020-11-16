@@ -17,6 +17,7 @@ export default class Wind0w extends Component {
 			styles: { top: this.props.initTop, left: this.props.initLeft, zIndex: 0 },
 		};
 		this.newWindow = this.newWindow.bind(this);
+		this.toggleWindow = this.toggleWindow.bind(this);
 		this.startDrag = this.startDrag.bind(this);
 		this.toFront = this.toFront.bind(this);
 		this.dragging = this.dragging.bind(this);
@@ -29,6 +30,15 @@ export default class Wind0w extends Component {
 			return [...prevWindows, { buddy: user, top: 50, left: 170, open: true }];
 		});
 		console.log(`New chat window with ${user}.`);
+	}
+	toggleWindow(buddy) {
+		this.props.setWindows((prevWindows) => {
+			const newWindows = prevWindows.map((window) => {
+				if (window.buddy === buddy) return {...window, open: !window.open};
+				return window;
+			})
+			return newWindows;
+		});
 	}
 
 	startDrag(e) {
@@ -97,7 +107,7 @@ export default class Wind0w extends Component {
 						<div className="title-bar-controls">
 							<button aria-label="Minimize" onDoubleClick={() => console.log('Double clicked!')} />
 							<button aria-label="Maximize" />
-							<button aria-label="Close" />
+							<button aria-label="Close" onClick={() => {this.toggleWindow(this.props.buddy)}} />
 						</div>
 					</div>
 
@@ -111,7 +121,7 @@ export default class Wind0w extends Component {
                             width={this.props.frameW} >
                         </iframe> */}
 						{!this.props.user && <Login setUser={this.props.setUser} />}
-						{this.props.type === 'main' && this.props.user && <Buddies user={this.props.user} newWindow={this.newWindow}/>}
+						{this.props.type === 'main' && this.props.user && <Buddies user={this.props.user} newWindow={this.newWindow} toggleWindow={this.toggleWindow}/>}
 						{this.props.type === 'chat' && this.props.user && <Convo user={this.props.user} recip={this.props.buddy} />}
 						{/*{this.props.type === 'chat' && this.props.user &&  <Login setUser={this.props.setUser} />}*/}
 					</div>

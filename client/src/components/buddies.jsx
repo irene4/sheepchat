@@ -1,10 +1,9 @@
 import React, { useRef } from 'react';
 import { useChats } from '../chatProvider';
 import Chats from './chats';
-import Convo from './convo';
 import Store from '../local';
 
-export default function Buddies({ user , newWindow }) {
+export default function Buddies({ user , newWindow, toggleWindow }) {
 	const userRef = useRef();
 	const { createChat } = useChats();
 	const [buddy, setBuddy] = Store('buddy', []);
@@ -14,7 +13,6 @@ export default function Buddies({ user , newWindow }) {
 		newWindow(userRef.current.value);
 		createChat(userRef.current.value);
 		setBuddy(userRef.current.value);
-		
 		userRef.current.value = '';
 	}
 
@@ -29,7 +27,7 @@ export default function Buddies({ user , newWindow }) {
 					</li>
 					<li style={{ paddingTop: '1rem' }}>
 						Chats
-						<Chats setBuddy={setBuddy} />
+						<Chats setBuddy={setBuddy} toggleWindow={toggleWindow}/>
 					</li>
 
 					<form onSubmit={submit} style={{ paddingTop: '1rem' }}>

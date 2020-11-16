@@ -1,7 +1,7 @@
 import React from 'react';
 import { useChats } from '../chatProvider';
 
-export default function Chats({ setBuddy }) {
+export default function Chats({ setBuddy, toggleWindow }) {
 	const { chats } = useChats();
 
 	return (
@@ -11,7 +11,8 @@ export default function Chats({ setBuddy }) {
 					<li key={index} style={{ color: 'green', fontWeight: 'bold', cursor: 'pointer' }}>
 						<div
 							onClick={(e) => {
-								setBuddy(chat.user);
+								//setBuddy(chat.user);
+								toggleWindow(chat.user);
 							}}
 						>
 							{chat.user}

@@ -29,18 +29,21 @@ export default function App() {
 					/>
 					{windows.map((window) => {
 						return (
-							<Wind0w
-								type={'chat'}
-								windowName={`${window.buddy} - Sheep Chat`}
-								user={user}
-								buddy={window.buddy}
-								incZ={incZ}
-								highestZ={highestZ}
-								top={window.top}
-								left={window.left}
-								initTop={30}
-								initLeft={150}
-							/>
+							window.open && (
+								<Wind0w
+									type={'chat'}
+									windowName={`${window.buddy} - Sheep Chat`}
+									user={user}
+									setWindows={setWindows}
+									buddy={window.buddy}
+									incZ={incZ}
+									highestZ={highestZ}
+									top={window.top}
+									left={window.left}
+									initTop={30}
+									initLeft={150}
+								/>
+							)
 						);
 					})}
 				</ChatProvider>
