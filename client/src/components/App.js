@@ -24,8 +24,10 @@ export default function App() {
 						setUser={setUser}
 						incZ={incZ}
 						highestZ={highestZ}
-						initTop={30}
-						initLeft={150}
+						top={30}
+						left={150}
+						//initTop={30}
+						//initLeft={150}
 					/>
 					{windows.map((window) => {
 						return (

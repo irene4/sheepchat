@@ -14,7 +14,8 @@ export default class Wind0w extends Component {
 			X: 0,
 			Y: 0,
 			dragging: false,
-			styles: { top: this.props.initTop, left: this.props.initLeft, zIndex: 0 },
+			//styles: { top: this.props.initTop, left: this.props.initLeft, zIndex: 0 },
+			styles: { top: this.props.top, left: this.props.left, zIndex: 0 },
 		};
 		this.newWindow = this.newWindow.bind(this);
 		this.toggleWindow = this.toggleWindow.bind(this);
@@ -35,6 +36,15 @@ export default class Wind0w extends Component {
 		this.props.setWindows((prevWindows) => {
 			const newWindows = prevWindows.map((window) => {
 				if (window.buddy === buddy) return {...window, open: !window.open};
+				return window;
+			})
+			return newWindows;
+		});
+	}
+	savePlace(left, top) {
+		this.props.setWindows((prevWindows) => {
+			const newWindows = prevWindows.map((window) => {
+				if (window.buddy === this.props.buddy) return {...window, left: left, top: top};
 				return window;
 			})
 			return newWindows;
@@ -92,9 +102,12 @@ export default class Wind0w extends Component {
 
 	stopDrag(e) {
 		e.preventDefault();
+		var left = e.screenX - this.state.X;
+		var top = e.screenY - this.state.Y;
 		this.setState({
 			dragging: false,
 		});
+		this.savePlace(left, top);
 	}
 
 	render() {
