@@ -4,11 +4,10 @@ import Chats from './chats';
 import Convo from './convo';
 import Store from '../local';
 
-export default function Chatroom({ user , newWindow }) {
+export default function Buddies({ user , newWindow }) {
 	const userRef = useRef();
 	const { createChat } = useChats();
 	const [buddy, setBuddy] = Store('buddy', []);
-	const expanded = false;
 
 	function submit(e) {
 		e.preventDefault();
@@ -21,9 +20,9 @@ export default function Chatroom({ user , newWindow }) {
 
 	React.useEffect(() => {}, []);
 	return (
-		<div style={{ width: '30rem', display: 'in-line block' }}>
+		<div style={{ width: '10rem', height: '20rem',display: 'in-line block' }}>
 			<aside>
-				<ul className="tree-view" style={{ float: 'left', width: '8rem' }}>
+				<ul className="tree-view" style={{ float: 'left', width: '9.25rem' }}>
 					<li>
 						Welcome,
 						<span style={{ color: 'blue' }}> {user}</span>
@@ -42,19 +41,6 @@ export default function Chatroom({ user , newWindow }) {
 					</form>
 				</ul>
 			</aside>
-			{expanded &&
-				<div
-				style={{
-					height: '20rem',
-					width: '20rem',
-					position: 'relative',
-					display: 'inline-block',
-					marginLeft: '5px',
-					backgroundColor: 'white',
-				}}
-			>
-			<Convo user={user} recip={buddy} />
-			</div>}
 		</div>
 	);
 }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Chatroom from './chatroom';
+import Buddies from './buddies';
 import Login from './login';
+import Convo from './convo';
 import icon from '../photos/sheepchat-icon.png'
 import './style/wind0w.css';
 
@@ -14,11 +16,19 @@ export default class Wind0w extends Component {
 			dragging: false,
 			styles: { top: this.props.initTop, left: this.props.initLeft, zIndex: 0 },
 		};
+		this.newWindow = this.newWindow.bind(this);
 		this.startDrag = this.startDrag.bind(this);
 		this.toFront = this.toFront.bind(this);
 		this.dragging = this.dragging.bind(this);
 		this.stopDrag = this.stopDrag.bind(this);
 		window.addEventListener('mousemove', this.dragging);
+	}
+
+	newWindow(user) {
+		this.props.setWindows((prevWindows) => {
+			return [...prevWindows, { buddy: user, top: 50, left: 170, open: true }];
+		});
+		console.log(`New chat window with ${user}.`);
 	}
 
 	startDrag(e) {
@@ -83,7 +93,7 @@ export default class Wind0w extends Component {
 				<div className="window">
 					<img src={icon} style={{position:"absolute", padding:"6px"}} width="18px"></img>
 					<div className="title-bar" style={{ cursor: 'grab' }} onMouseDown={this.startDrag} onMouseUp={this.stopDrag}>
-						<div className="title-bar-text" style={{position:"relative", left:"20px"}}>Sheep Chat</div>
+						<div className="title-bar-text" style={{position:"relative", left:"20px"}}>{this.props.windowName}</div>
 						<div className="title-bar-controls">
 							<button aria-label="Minimize" onDoubleClick={() => console.log('Double clicked!')} />
 							<button aria-label="Maximize" />
@@ -100,7 +110,10 @@ export default class Wind0w extends Component {
                             height={this.props.frameH}
                             width={this.props.frameW} >
                         </iframe> */}
-						{this.props.user ? <Chatroom user={this.props.user} /> : <Login setUser={this.props.setUser} />}
+						{!this.props.user && <Login setUser={this.props.setUser} />}
+						{this.props.type === 'main' && this.props.user && <Buddies user={this.props.user} newWindow={this.newWindow}/>}
+						{this.props.type === 'chat' && this.props.user && <Convo user={this.props.user} recip={this.props.buddy} />}
+						{/*{this.props.type === 'chat' && this.props.user &&  <Login setUser={this.props.setUser} />}*/}
 					</div>
 				</div>
 			</div>

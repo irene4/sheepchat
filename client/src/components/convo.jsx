@@ -14,25 +14,27 @@ export default function Convo(props) {
 	}
 	return (
 		<div>
-			<div id="box" style={{ height: '14rem', width: '20rem', overflow: 'auto' }}>
-				<ul style={{ listStyle: 'none' }}>
-					{thisChat && thisChat.messages.length===0 && <label><strong style={{color: 'green'}}>New chat with {props.recip}.</strong></label>}
-					{thisChat &&
-						thisChat.messages.map((mssg, index) => {
-							return (
-								<li key={index} >
-									<label>
-										<strong style={mssg.sender === props.user ? { color: 'blue' } : { color: 'green' }}>{mssg.sender}: </strong>
-										{'   '}
-										{mssg.txt}
-									</label>
-								</li>
-							);
-						})}
-				</ul>
+			<div id="box" style={{ height: '18rem', width: '20rem'}}>
+				<div style={{ height: '12rem', width: '20rem', overflow: 'auto', backgroundColor:'white' }}>
+					<ul style={{ listStyle: 'none' }}>
+						{thisChat && thisChat.messages.length===0 && <label><strong style={{color: 'green'}}>New chat with {props.recip}.</strong></label>}
+						{thisChat &&
+							thisChat.messages.map((mssg, index) => {
+								return (
+									<li key={index} >
+										<label>
+											<strong style={mssg.sender === props.user ? { color: 'blue' } : { color: 'green' }}>{mssg.sender}: </strong>
+											{'   '}
+											{mssg.txt}
+										</label>
+									</li>
+								);
+							})}
+					</ul>
+				</div>
 			</div>
 			<form onSubmit={submit}>
-				<div className="field-row-stacked" style={{ width: '100%', position: 'absolute', bottom: '0' }}>
+				<div className="field-row-stacked" style={{ width: '20rem', position: 'absolute', bottom: '0' }}>
 					<label style={{ paddingLeft: '.5rem' }}> Chatbox:</label>
 					<textarea
 						id="chatbox"
@@ -47,7 +49,7 @@ export default function Convo(props) {
 						style={{ resize: 'none' }}
 						required
 					></textarea>
-					<button type="submit" style={{ width: '30px' }}>
+					<button type="submit" style={{ marginBottom: '.35rem', width: '30px' }}>
 						Send
 					</button>
 				</div>
