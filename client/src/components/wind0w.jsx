@@ -142,5 +142,3 @@ export default class Wind0w extends Component {
 		);
 	}
 }
-//{this.props.user != null ? <Chatroom user={this.props.user} /> : <Login setUser={this.props.setUser} />}
-//cmd shift p

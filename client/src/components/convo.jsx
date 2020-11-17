@@ -14,8 +14,8 @@ export default function Convo(props) {
 	}
 	return (
 		<div>
-			<div id="box" style={{ height: '18rem', width: '20rem'}}>
-				<div style={{ height: '12rem', width: '20rem', overflow: 'auto', backgroundColor:'white' }}>
+			<div style={{ height: '18rem', width: '20rem'}}>
+				<div id="box" style={{ height: '12rem', width: '20rem', overflow: 'auto', backgroundColor:'white' }}>
 					<ul style={{ listStyle: 'none' }}>
 						{thisChat && thisChat.messages.length===0 && <label><strong style={{color: 'green'}}>New chat with {props.recip}.</strong></label>}
 						{thisChat &&
@@ -57,6 +57,5 @@ export default function Convo(props) {
 		</div>
 	);
 }
-
 //scrollIntoView might be better for scrolling
 //li as <label> changes font
