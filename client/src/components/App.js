@@ -29,7 +29,7 @@ export default function App() {
 						//initTop={30}
 						//initLeft={150}
 					/>
-					{windows.map((window) => {
+					{windows.map((window, index) => {
 						return (
 							window.open && (
 								<Wind0w
@@ -40,6 +40,7 @@ export default function App() {
 									buddy={window.buddy}
 									incZ={incZ}
 									highestZ={highestZ}
+									zIndex={index}
 									top={window.top}
 									left={window.left}
 									initTop={30}

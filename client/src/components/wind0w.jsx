@@ -15,7 +15,7 @@ export default class Wind0w extends Component {
 			Y: 0,
 			dragging: false,
 			//styles: { top: this.props.initTop, left: this.props.initLeft, zIndex: 0 },
-			styles: { top: this.props.top, left: this.props.left, zIndex: 0 },
+			styles: { top: this.props.top, left: this.props.left, zIndex: this.props.zIndex },
 		};
 		this.newWindow = this.newWindow.bind(this);
 		this.toggleWindow = this.toggleWindow.bind(this);
@@ -136,7 +136,6 @@ export default class Wind0w extends Component {
 						{!this.props.user && <Login setUser={this.props.setUser} />}
 						{this.props.type === 'main' && this.props.user && <Buddies user={this.props.user} newWindow={this.newWindow} toggleWindow={this.toggleWindow}/>}
 						{this.props.type === 'chat' && this.props.user && <Convo user={this.props.user} recip={this.props.buddy} />}
-						{/*{this.props.type === 'chat' && this.props.user &&  <Login setUser={this.props.setUser} />}*/}
 					</div>
 				</div>
 			</div>
