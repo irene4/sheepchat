@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useChats } from '../chatProvider';
 
 export default function Convo(props) {
-	const { chats, sendMssg } = useChats();
+	const { chats, sendMssg, deleteChat } = useChats();
 	const [txt, setTxt] = useState('');
 	const thisChat = chats.find((chat) => {
 		return chat.user === props.recip;
@@ -49,13 +49,15 @@ export default function Convo(props) {
 						style={{ resize: 'none' }}
 						required
 					></textarea>
-					<button type="submit" style={{ marginBottom: '.35rem', width: '30px' }}>
+					<button type="submit" style={{ marginBottom: '.35rem', width: '30px'}}>
 						Send
 					</button>
+					<button onClick={()=>{deleteChat(props.recip)}} style={{ marginBottom: '.35rem', width: '30px'}}>Delete</button>
 				</div>
 			</form>
 		</div>
 	);
 }
+//TODO: delete chat must also delete the window
 //scrollIntoView might be better for scrolling
 //li as <label> changes font

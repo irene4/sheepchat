@@ -18,6 +18,13 @@ export function ChatProvider({ user, children }) {
 		});
 		console.log(`New chat created with ${user}.`);
 	}
+	function deleteChat(user) {
+		setChats((prevChats) => {
+			const newChats = prevChats.filter((chat) => chat.user !== user);
+			return newChats;
+		});
+		console.log(`Deleted chat with ${user}.`);
+	}
 	function scroll() {
 		const box = document.getElementById('box');
 		if (box) box.scrollTop = box.scrollHeight;
@@ -60,5 +67,5 @@ export function ChatProvider({ user, children }) {
 		return () => socket.off('get mssg!');
 	}, [socket, appendMssg]);
 
-	return <ChatCtx.Provider value={{ chats, createChat, sendMssg }}> {children} </ChatCtx.Provider>;
+	return <ChatCtx.Provider value={{ chats, createChat, deleteChat, sendMssg }}> {children} </ChatCtx.Provider>;
 }
