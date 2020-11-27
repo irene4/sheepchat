@@ -14,7 +14,7 @@ export function ChatProvider({ user, children }) {
 
 	function createChat(user) {
 		setChats((prevChats) => {
-			return [...prevChats, { user, messages: [] }];
+			return [...prevChats, { user, open: true, top: 30, left: 150, messages: [] }];
 		});
 		console.log(`New chat created with ${user}.`);
 	}
@@ -24,6 +24,15 @@ export function ChatProvider({ user, children }) {
 			return newChats;
 		});
 		console.log(`Deleted chat with ${user}.`);
+	}
+	function toggleWindow(buddy) {
+		setChats((prevChats) => {
+			const newChats = prevChats.map((chat) => {
+				if (chat.user === buddy) return { ...chat, open: !chat.open };
+				return chat;
+			});
+			return newChats;
+		});
 	}
 	function scroll() {
 		const box = document.getElementById('box');
@@ -67,5 +76,5 @@ export function ChatProvider({ user, children }) {
 		return () => socket.off('get mssg!');
 	}, [socket, appendMssg]);
 
-	return <ChatCtx.Provider value={{ chats, createChat, deleteChat, sendMssg }}> {children} </ChatCtx.Provider>;
+	return <ChatCtx.Provider value={{ chats, createChat, deleteChat, toggleWindow, sendMssg }}> {children} </ChatCtx.Provider>;
 }

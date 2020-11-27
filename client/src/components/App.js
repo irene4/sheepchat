@@ -4,13 +4,14 @@ import Wind0w from './wind0w';
 //import Login from '../login';
 import Store from '../local.js';
 import './style/App.css';
-import { ChatProvider } from '../chatProvider';
+import { ChatProvider, useChats } from '../chatProvider';
 import { SocketProvider } from '../socketProvider';
 
 export default function App() {
 	const [highestZ, incZ] = React.useState(0);
 	const [user, setUser] = Store('user', '');
-	const [windows, setWindows] = Store('windows', []);
+	//const { chats } = useChats();
+	//const [windows, setWindows] = Store('windows', []);
 
 	return (
 		<div className="App">
@@ -20,7 +21,6 @@ export default function App() {
 						type={'main'}
 						windowName={'Sheep Chat'}
 						user={user}
-						setWindows={setWindows}
 						setUser={setUser}
 						incZ={incZ}
 						highestZ={highestZ}
@@ -29,26 +29,28 @@ export default function App() {
 						//initTop={30}
 						//initLeft={150}
 					/>
-					{windows.map((window, index) => {
-						return (
-							window.open && (
-								<Wind0w
-									type={'chat'}
-									windowName={`${window.buddy} - Sheep Chat`}
-									user={user}
-									setWindows={setWindows}
-									buddy={window.buddy}
-									incZ={incZ}
-									highestZ={highestZ}
-									zIndex={index}
-									top={window.top}
-									left={window.left}
-									initTop={30}
-									initLeft={150}
-								/>
-							)
-						);
-					})}
+
+					{chats &&
+						chats.map((chat, index) => {
+							return (
+								chat.open && (
+									<Wind0w
+										type={'chat'}
+										windowName={`${chat.user} - Sheep Chat`}
+										user={user}
+										//setWindows={setWindows}
+										buddy={chat.user}
+										incZ={incZ}
+										highestZ={highestZ}
+										zIndex={index}
+										top={chat.top}
+										left={chat.left}
+										initTop={30}
+										initLeft={150}
+									/>
+								)
+							);
+						})}
 				</ChatProvider>
 			</SocketProvider>
 		</div>

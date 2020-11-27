@@ -12,7 +12,7 @@ export default function Chatroom({ user , newWindow, toggleWindow }) {
 
 	function submit(e) {
 		e.preventDefault();
-		newWindow(userRef.current.value);
+		//newWindow(userRef.current.value);
 		createChat(userRef.current.value);
 		setBuddy(userRef.current.value);
 		userRef.current.value = '';

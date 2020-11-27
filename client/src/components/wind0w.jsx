@@ -17,8 +17,8 @@ export default class Wind0w extends Component {
 			//styles: { top: this.props.initTop, left: this.props.initLeft, zIndex: 0 },
 			styles: { top: this.props.top, left: this.props.left, zIndex: this.props.zIndex },
 		};
-		this.newWindow = this.newWindow.bind(this);
-		this.toggleWindow = this.toggleWindow.bind(this);
+		//this.newWindow = this.newWindow.bind(this);
+		//this.toggleWindow = this.toggleWindow.bind(this);
 		this.startDrag = this.startDrag.bind(this);
 		this.toFront = this.toFront.bind(this);
 		this.dragging = this.dragging.bind(this);
@@ -26,30 +26,30 @@ export default class Wind0w extends Component {
 		window.addEventListener('mousemove', this.dragging);
 	}
 
-	newWindow(user) {
-		this.props.setWindows((prevWindows) => {
-			return [...prevWindows, { buddy: user, top: 50, left: 170, open: true }];
-		});
-		console.log(`New chat window with ${user}.`);
-	}
-	toggleWindow(buddy) {
-		this.props.setWindows((prevWindows) => {
-			const newWindows = prevWindows.map((window) => {
-				if (window.buddy === buddy) return {...window, open: !window.open};
-				return window;
-			})
-			return newWindows;
-		});
-	}
-	savePlace(left, top) {
-		this.props.setWindows((prevWindows) => {
-			const newWindows = prevWindows.map((window) => {
-				if (window.buddy === this.props.buddy) return {...window, left: left, top: top};
-				return window;
-			})
-			return newWindows;
-		});
-	}
+	// newWindow(user) {
+	// 	this.props.setWindows((prevWindows) => {
+	// 		return [...prevWindows, { buddy: user, top: 50, left: 170, open: true }];
+	// 	});
+	// 	console.log(`New chat window with ${user}.`);
+	// }
+	// toggleWindow(buddy) {
+	// 	this.props.setChats((prevChats) => {
+	// 		const newChats = prevChats.map((chat) => {
+	// 			if (chat.user === buddy) return {...chat, open: !window.open};
+	// 			return chat;
+	// 		})
+	// 		return newChats;
+	// 	});
+	// }
+	// storeWindowPosition(left, top) {
+	// 	this.props.setChats((prevChats) => {
+	// 		const newChats = prevChats.map((chat) => {
+	// 			if (chat.user === this.props.buddy) return {...chat, left: left, top: top};
+	// 			return chat;
+	// 		})
+	// 		return newChats;
+	// 	});
+	// }
 
 	startDrag(e) {
 		e.preventDefault();
@@ -107,7 +107,7 @@ export default class Wind0w extends Component {
 		this.setState({
 			dragging: false,
 		});
-		this.savePlace(left, top);
+		//this.savePlace(left, top);
 	}
 
 	render() {
@@ -134,7 +134,7 @@ export default class Wind0w extends Component {
                             width={this.props.frameW} >
                         </iframe> */}
 						{!this.props.user && <Login setUser={this.props.setUser} />}
-						{this.props.type === 'main' && this.props.user && <Buddies user={this.props.user} newWindow={this.newWindow} toggleWindow={this.toggleWindow}/>}
+						{this.props.type === 'main' && this.props.user && <Buddies user={this.props.user} />}
 						{this.props.type === 'chat' && this.props.user && <Convo user={this.props.user} recip={this.props.buddy} />}
 					</div>
 				</div>

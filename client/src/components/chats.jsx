@@ -1,8 +1,8 @@
 import React from 'react';
 import { useChats } from '../chatProvider';
 
-export default function Chats({ setBuddy, toggleWindow }) {
-	const { chats } = useChats();
+export default function Chats({ setBuddy }) {
+	const { chats, toggleWindow } = useChats();
 
 	return (
 		<ul>
